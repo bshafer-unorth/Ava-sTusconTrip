@@ -103,8 +103,7 @@
       margin-top: 0.5em;
       color: #4caf50; /* Green color for success */
       font-weight: bold;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+      opacity: 1; /* Make it always visible when present */
     }
   </style>
 </head>
@@ -249,14 +248,7 @@
       messageDiv.textContent = `🎉 ${title} Adventure Complete!`;
       messageDiv.className = "completion-message";
       sectionDiv.appendChild(messageDiv);
-      setTimeout(() => {
-        messageDiv.style.opacity = 0;
-        setTimeout(() => messageDiv.remove(), 1000);
-      }, 3000);
-      // Trigger fade-in after a short delay to ensure it's added to the DOM
-      setTimeout(() => {
-        messageDiv.style.opacity = 1;
-      }, 50);
+      // Removed the setTimeout for fading and removal
     }
 
     function checkSectionCompletion(sectionDiv, sectionData) {
@@ -266,6 +258,8 @@
 
       if (allChecked && !hasMessage) {
         showCompletionMessage(sectionDiv, sectionData.title);
+      } else if (!allChecked && hasMessage) {
+        hasMessage.remove(); // Remove the message if the section is no longer complete
       }
     }
 
