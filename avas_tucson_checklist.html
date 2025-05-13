@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ava's Tucson Bucket List</title>
+  <style>
+    body {
+      font-family: "Segoe UI Emoji", sans-serif;
+      background-color: #fefbe9;
+      color: #333;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 0.2em;
+    }
+    .subtitle {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 1em;
+    }
+    .section {
+      margin-top: 1.5em;
+    }
+    .section h2 {
+      font-size: 1.2em;
+      margin-bottom: 0.3em;
+    }
+    label {
+      display: block;
+      margin: 0.4em 0;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.3);
+      margin-right: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌟 Ava’s Tucson Bucket List Adventure! 🌵🐾🍦</h1>
+  <div class="subtitle">
+    (Trip Dates: June 8–15)<br />
+    ✅ Check them off as you go and collect memories!
+  </div>
+
+  <div id="list"></div>
+
+  <script>
+    const data = [
+      {
+        title: "🏜️ Sabino Canyon Adventures",
+        items: [
+          "Ride the Sabino Canyon tram 🚋",
+          "Walk part of the Seven Falls Trail 👟",
+          "Touch (not too close!) a real cactus 🌵",
+          "Spot a lizard sunbathing on a rock 🦎",
+          "Hear the sounds of the desert creek 💦",
+          "Find a prickly pear cactus and try something made with it 🍐"
+        ]
+      },
+      {
+        title: "🌲 Mount Lemmon Explorer",
+        items: [
+          "Look down from Windy Point Vista and say “whoa!” 🔭",
+          "Touch a pine tree taller than a building 🌲",
+          "Eat a giant cookie from The Cookie Cabin 🍪",
+          "Spot a cool rock formation 🪨",
+          "See a chipmunk or squirrel 🐿️",
+          "Feel the chilly mountain breeze at the top ❄️"
+        ]
+      },
+      {
+        title: "🐘 Reid Park Zoo Critter Quest",
+        items: [
+          "See a giraffe or elephant up close 🦒🐘",
+          "Watch a zookeeper feed an animal 🍽️",
+          "Find an animal that lives in the desert 🏜️",
+          "Take a photo with your favorite animal 📸",
+          "Spot 3 animals that start with the letter “M” 🔤"
+        ]
+      },
+      {
+        title: "🦉 Arizona-Sonora Desert Museum Discoveries",
+        items: [
+          "Watch a raptor or hawk fly overhead 🦅",
+          "Touch a stingray at the touch pool 🌊",
+          "Walk through the hummingbird garden 🐦",
+          "Spot a mountain lion or bobcat 🐾",
+          "Pretend you're an explorer in the desert cave ⛏️",
+          "Touch a piece of volcanic rock 🪨"
+        ]
+      },
+      {
+        title: "🌵 Saguaro National Park Safari",
+        items: [
+          "Count 10 giant saguaro cacti 🔟",
+          "Find one with arms that look like a person 🙆",
+          "Take a family photo with a cactus sunset 🌅",
+          "Spot an animal hole or burrow 🕳️",
+          "Look for a cactus wren nest 🐦"
+        ]
+      },
+      {
+        title: "🍭 Sweet Treats & Tasty Bites",
+        items: [
+          "Try prickly pear candy, lemonade, or syrup 🍬🍋",
+          "Eat a chocolate chip cookie in the mountains 🍪",
+          "Cool off with a scoop of gelato or ice cream 🍨",
+          "Sip a fruit smoothie or horchata 🥤",
+          "Eat tacos or Mexican food and say “¡Delicioso!” 🌮"
+        ]
+      },
+      {
+        title: "💛 Family Fun & Memory Makers",
+        items: [
+          "Take a silly selfie with Luke and Haley 🤳",
+          "Collect a souvenir or sticker from each place 🛍️",
+          "Be the navigator or map helper for a day 🗺️",
+          "Draw your favorite animal in your journal 🎨",
+          "Stargaze and spot 5 stars in the night sky ✨",
+          "Take a photo pretending to “hug” a cactus (but don’t actually hug it!) 😄🌵"
+        ]
+      }
+    ];
+
+    const container = document.getElementById("list");
+    data.forEach(section => {
+      const div = document.createElement("div");
+      div.className = "section";
+      div.innerHTML = `<h2>${section.title}</h2>`;
+      section.items.forEach((item, i) => {
+        const id = `${section.title.replace(/\W/g, '')}-${i}`;
+        div.innerHTML += `
+          <label><input type="checkbox" id="${id}" />${item}</label>
+        `;
+      });
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
