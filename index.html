@@ -69,6 +69,7 @@
       font-size: 18px;
       animation: sparkle 700ms ease-out forwards;
       pointer-events: none;
+      z-index: 9999;
     }
 
     @keyframes sparkle {
@@ -196,7 +197,11 @@
       localStorage.setItem(id, checked);
     }
 
-    function sparkleEffect(x, y) {
+    function sparkleEffect(checkbox) {
+      const rect = checkbox.getBoundingClientRect();
+      const x = rect.left + rect.width / 2 + window.scrollX;
+      const y = rect.top + rect.height / 2 + window.scrollY;
+
       const emojis = ["✨", "🌟", "💫", "⭐"];
       const sparkle = document.createElement("div");
       sparkle.className = "sparkle";
@@ -221,12 +226,11 @@
         checkbox.id = id;
         checkbox.checked = isChecked;
 
-        checkbox.addEventListener("change", (e) => {
+        checkbox.addEventListener("change", () => {
           saveProgress(id, checkbox.checked);
           updateProgressBar();
           if (checkbox.checked) {
-            const rect = e.target.getBoundingClientRect();
-            sparkleEffect(rect.left + rect.width / 2, rect.top);
+            sparkleEffect(checkbox);
           }
         });
 
