@@ -98,6 +98,14 @@
         transform: scale(1.6) translateY(-60px) rotate(30deg);
       }
     }
+    .completion-message {
+      text-align: center;
+      margin-top: 0.5em;
+      color: #4caf50; /* Green color for success */
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
   </style>
 </head>
 <body>
@@ -236,6 +244,31 @@
       }
     }
 
+    function showCompletionMessage(sectionDiv, title) {
+      const messageDiv = document.createElement("div");
+      messageDiv.textContent = `🎉 ${title} Adventure Complete!`;
+      messageDiv.className = "completion-message";
+      sectionDiv.appendChild(messageDiv);
+      setTimeout(() => {
+        messageDiv.style.opacity = 0;
+        setTimeout(() => messageDiv.remove(), 1000);
+      }, 3000);
+      // Trigger fade-in after a short delay to ensure it's added to the DOM
+      setTimeout(() => {
+        messageDiv.style.opacity = 1;
+      }, 50);
+    }
+
+    function checkSectionCompletion(sectionDiv, sectionData) {
+      const checkboxes = sectionDiv.querySelectorAll('input[type="checkbox"]');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      const hasMessage = sectionDiv.querySelector('.completion-message');
+
+      if (allChecked && !hasMessage) {
+        showCompletionMessage(sectionDiv, sectionData.title);
+      }
+    }
+
     data.forEach((section, sectionIndex) => {
       const div = document.createElement("div");
       div.className = "section";
@@ -253,6 +286,7 @@
           if (checkbox.checked) {
             sparkleEffect(checkbox);
           }
+          checkSectionCompletion(div, section); // Check if the section is now complete
         });
         const label = document.createElement("label");
         label.htmlFor = id;
@@ -264,6 +298,12 @@
     });
 
     updateProgressBar();
+
+    // Initial check for section completion in case some were already checked
+    const sectionDivs = document.querySelectorAll('.section');
+    sectionDivs.forEach((div, index) => {
+      checkSectionCompletion(div, data[index]);
+    });
   </script>
 </body>
 </html>
